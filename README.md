@@ -46,8 +46,28 @@ def test_phonebook_contains_all_names():
 ### Zadanie 2
 1. Dopisz walidator który w momencie dodawania numeru do książki (pod dowolnym kluczem) sprawdzi czy ciąg znaków jest cyframi (o długości między 9 a 11 cyfr)
 2. Kod powinien **rzucać wyjątkiem ValueError** w przypadku próby dodania błędnego numeru
-3. Napisz dwa testy który spróbują dodać do książki:
+3. Napisz dwa osobne testy który spróbują dodać do książki (testy nie mają się spodziewać wyjątku):
    1. 8 cyfrowy numer
    2. 12 cyfrowy numer
 4. Jako asercji użyj sprawdzenia długości setu `names()` (powinien być zero)
 5. Uruchom testy, czy dojdziemy do asercji?
+
+
+### Zadanie 3
+1. Napisz fixturę `empty_phonebook` która zwróci pusty obiekt PhoneBook()
+2. Zrefaktoryzuj wszystkie 3 testy, tak żeby używały fixtury
+
+
+### Zadanie 4
+1. Napisz fixturę `populated_phonebook` która zwróci obiekt PhoneBook() z kluczami `Rossmann` oraz `Missing`
+2. Zrefaktoryzuj kod testu z zadania numer 1, tak żeby używał fixtury `populated_phonebook`
+
+### Zadanie 5
+1. Zrefaktoryzuj dwa testy z zadania 2 (dla 8 i 12 cyfr) używając dekoratora `@pytest.mark.parametrize`
+2. Uruchom testy i sprawdź czy wszystko działa
+
+### Zadanie 6
+1. Usuń `try expect` z kodu testu zadania 5.
+2. Popraw test z zadania 5 tak aby spodziewał się wyjątku.
+3. Uruchom testy i sprawdź czy przechodzą
+4. Zmień typ spodziewanego wyjątku w teście na inny (np. `FileNotFoundError`) i uruchom test jeszcze raz.
