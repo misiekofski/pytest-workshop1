@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_lookup_by_name(populated_phonebook):
     populated_phonebook.add("Rossmann", "123456789")
     assert "123456789" == populated_phonebook.lookup("Rossmann")
@@ -10,15 +13,20 @@ def test_phonebook_contains_all_names(populated_phonebook):
 
 
 def test_number_isnt_numeric(populated_phonebook):
-    populated_phonebook.add("Rossmann", "telefon")
-    assert len(populated_phonebook.names()) == 0
+    with pytest.raises(ValueError):
+        populated_phonebook.add("BadNumber", "telefon")
+    assert len(populated_phonebook.names()) == 2
+
+@pytest.mark.parametrize("name, number", [('TooLong', "123456789012")])
+def test_number_too_long(populated_phonebook, name, number):
+    with pytest.raises(FileExistsError):
+        populated_phonebook.add(name, number)
+    assert len(populated_phonebook.names()) == 2
 
 
-def test_number_too_long(populated_phonebook):
-    populated_phonebook.add("Rossmann", "123456789012")
-    assert len(populated_phonebook.names()) == 0
+@pytest.mark.parametrize("name, number", [('TooShort', "12345678")])
+def test_number_too_short(populated_phonebook, name, number):
+    with pytest.raises(ValueError):
+        populated_phonebook.add(name, number)
+    assert len(populated_phonebook.names()) == 2
 
-
-def test_number_too_short(populated_phonebook):
-    populated_phonebook.add("Rossmann", "12345678")
-    assert len(populated_phonebook.names()) == 0
