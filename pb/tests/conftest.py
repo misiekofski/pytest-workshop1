@@ -12,3 +12,4 @@ def populated_phonebook() -> PhoneBook:
     pb = PhoneBook()
     pb.add('Rossmann', '123456789')
     pb.add('Missing', '1234567890')
+    return pb
